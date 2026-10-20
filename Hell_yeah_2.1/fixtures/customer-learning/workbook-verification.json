@@ -1,0 +1,14 @@
+{
+  "workbook_roundtrip_input_hash": "30b77f014394f3503461bf1a773a75a70947bbded262e6088604c4affa5f9c18",
+  "all_100_final_decisions_match": true,
+  "edited_first_customer": {
+    "before_usd": 700,
+    "after_usd": 0,
+    "recommendation": "repair_economics"
+  },
+  "invalid_duplicates_rejected": true,
+  "raw_formulas_rejected": true,
+  "worker_regression_tests_passed": 21,
+  "production_data_changed": false,
+  "no_consent_uses_personal_only": true
+}

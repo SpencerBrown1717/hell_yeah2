@@ -1,0 +1,30 @@
+{
+  "mode": "fixture",
+  "clock": "2026-10-18T12:00:00Z",
+  "organization_id": "fixture_org",
+  "actor": { "id": "fixture_owner", "capabilities": ["view_evidence", "edit_draft", "approve_launch"] },
+  "brand": { "id": "fixture_brand", "version": "1", "complete": true, "name": "Example Demo Software", "website": "https://example.com" },
+  "studio": {
+    "id": "fixture_creative_set", "version": "1", "copy_ready": true,
+    "landscape_selected": false, "square_selected": false,
+    "headline": "Book a product demo", "source_region": [0.1, 0.1, 0.8, 0.2]
+  },
+  "capture": { "id": "fixture_capture", "version": "1", "owned": true, "complete": true, "text": "Book a product demo", "permission": "owned_fixture" },
+  "tracker": { "id": "fixture_tracker", "enabled": true, "receiving_events": true, "verified_internal_event": true },
+  "wallet": { "available_micros": 500000000, "reserved_micros": 0, "spent_micros": 0, "pending_refund_micros": 0, "currency": "USD" },
+  "campaign": {
+    "id": "fixture_campaign", "version": "1", "managed_account_id": "fixture_managed_account",
+    "channel": "search", "goal": "conversions", "state": "Draft", "currency": "USD",
+    "maximum_spend_micros": 200000000, "keywords_read_only": true, "keyword_plan_version": "fixture_priced_plan_1"
+  },
+  "snapshot": {
+    "id": "fixture_metrics", "version": "1", "currency": "USD", "timezone": "America/Chicago",
+    "impressions": 20000, "clicks": 1000, "cost_micros": 1000000000, "conversions": 40,
+    "mature": true, "cutoff": "2026-10-17T00:00:00Z"
+  },
+  "outcomes": {
+    "source": "owned_assignment_fixture", "mature": true,
+    "control": { "assigned": 200, "conversions": 20 },
+    "treatment": { "assigned": 200, "conversions": 25 }
+  }
+}
