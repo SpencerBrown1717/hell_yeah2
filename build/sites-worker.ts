@@ -3,7 +3,14 @@ import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
 
 export default {
-  fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
+  async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
+    // Local preview starts from an empty D1 database. Apply the committed
+    // migrations before the first OS request; the hosted Site applies them
+    // through the platform, so this branch is absent from production builds.
+    if (import.meta.env.DEV && env.DB && new URL(request.url).pathname.startsWith("/api/os")) {
+      const { ensureLocalSchema } = await import("./local-d1-migrations");
+      await ensureLocalSchema(env.DB);
+    }
     let binding = ctx.props?.CONNECTORS;
     // Local preview emulates the same request-scoped capability. This branch and
     // the auxiliary service binding are absent from production builds.

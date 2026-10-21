@@ -23,6 +23,8 @@ Clean clones use the portable execution profile. The development server offers a
 
 The baseline dashboard uses browser-local fixture storage. The OS HTTP API uses local Cloudflare D1 during development and the configured D1 binding on the hosted Site. Clearing browser data does not clear server-side OS records. Local Worker state belongs under ignored `.wrangler/`; hosted records are unaffected by local changes.
 
+The local D1 database starts empty. The development Worker applies the committed `drizzle/*.sql` migrations, once each in file order, before it serves the first `/api/os` request (`build/local-d1-migrations.ts`, development builds only), and records them in the local `os_local_migrations` table. The hosted Site applies the same files through the platform. To reset local OS records, stop the server and delete `.wrangler/state`; the next OS request rebuilds the schema. `npm start` serves the production bundle, which contains no migration code, against the same local database, so run `npm run dev` and open an OS page once before using it.
+
 The four future products remain available at `/#growth`, `/#simulator`, `/#creative` and `/#experiments`, with supporting labs at `/#learning`, `/#demo` and `/#wallet-lab`. They are intentionally absent from the main navigation while the existing product is reviewed.
 
 ## Environment and integration
@@ -56,6 +58,7 @@ This is a Vinext/Vite Cloudflare Worker application, not a static-only site. `di
 | --- | --- |
 | Missing CSS or fonts | Run `npm run dev` or `node scripts/prepare-web.mjs`; do not edit generated `public/` copies. |
 | OS sign-in needed on localhost | Visit the local sign-in URL above, then reload. Use localhost rather than a LAN hostname. |
+| OS pages report "The OS connection needs attention" on localhost | Check the dev server log for `Local D1 migration failed`; stop the server, delete `.wrangler/state` and start again. A `SERVICE_FAILURE` with an empty local database means the migrations did not run. |
 | Unsupported engine or package-manager error | Check `node --version` and `pnpm --version`; use the pinned toolchain. |
 | Frozen install fails after changing dependencies | Update and review `pnpm-lock.yaml` with the pinned pnpm; do not bypass the frozen CI check. |
 | GitHub mirror rejects a push | Inspect the remote history and integrate it normally. Never force-push or replace the Site origin. |

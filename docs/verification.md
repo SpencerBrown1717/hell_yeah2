@@ -4,6 +4,14 @@ Documentation reviewed October 20, 2026, UTC. The current default experience is 
 
 ## Current release checks
 
+Executed October 21, 2026 UTC on a clean clone of `main` (Node 24.19.0, pnpm 11.25.0, `pnpm install --frozen-lockfile`):
+
+- `npm run quality`: passed, including strict lint with zero warnings, TypeScript, PRD/contrast validation, **199 tests passed / 0 failed**, and the Mastra/OS/campaign/continuous-learning rehearsals.
+- `npm run build`: passed with `/` and `/api/os/:path*` routes. The production Worker bundle contains no local-migration code.
+- Real-browser smoke test (headless Chromium at 1280×900 and 390×844): the Overview renders with the six-item navigation, **Set up your business** opens onboarding, and after the loopback sign-in the `#growth`, `#learning`, `#simulator`, `#creative` and `#experiments` deep links render with no failed requests or page errors. This is a rendering and request check, not a pixel or accessibility audit.
+- Defect repaired in this pass: on a clean clone the local D1 database had no tables, so every `/api/os` request returned `SERVICE_FAILURE` and the Growth OS pages showed "The OS connection needs attention". The development Worker now applies the committed `drizzle/*.sql` migrations once before the first OS request (`build/local-d1-migrations.ts`, `src/os/local-migrations.mjs`); four regression tests cover first application, idempotent replay, incremental application and batch rollback. The hosted platform's migration path is unchanged.
+- GitHub Actions had not executed `quality.yml` for any commit on `main`: both runs ended in 3 seconds with "The job was not started because recent account payments have failed or your spending limit needs to be increased." That is an account billing setting, not a code failure; the local checks above are the current evidence until a GitHub run completes.
+
 Executed October 20, 2026 UTC for the GitHub handoff:
 
 - `npm run quality`: passed, including strict lint with zero warnings, TypeScript, PRD/contrast validation, **195 tests passed / 0 failed**, and deterministic Mastra/OS/campaign/continuous-learning rehearsals.
