@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0D0C2B" />
+    <meta
+      name="description"
+      content="Your next move, backed by evidence. A connected HellYeah growth workspace."
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+    <title>Growth overview · HellYeah</title>
+    <link rel="icon" href="./assets/icon-orange.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="./assets/general-sans.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="./assets/lastik.otf"
+      as="font"
+      type="font/otf"
+      crossorigin
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./product.css" />
+    <link rel="stylesheet" href="./foundation.css" />
+    <script type="module" src="./js/boot.mjs"></script>
+  </head>
+  <body>
+    <a href="#main" data-action="skip-main" class="skip-link"
+      >Skip to workspace</a
+    >
+    <div id="app"></div>
+    <dialog id="dialog" aria-labelledby="dialog-title"></dialog>
+    <div
+      id="notifications"
+      class="toast-region"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+    <noscript
+      >This interactive workspace needs JavaScript enabled. All preview data is
+      fictional.</noscript
+    >
+  </body>
+</html>
