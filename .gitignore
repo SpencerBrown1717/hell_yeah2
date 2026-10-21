@@ -23,3 +23,6 @@ public/product.css
 public/foundation.css
 
 *.tsbuildinfo
+
+# Reconstructed byte-for-byte from web/encoded-assets/owners/.
+/web/assets/owners.webp

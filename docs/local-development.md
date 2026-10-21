@@ -13,6 +13,8 @@ If Corepack is unavailable, install the exact package manager with `npm install 
 
 Open `http://localhost:5173`. The dev command copies shared CSS, fonts and browser modules into `public/` automatically. Files under `public/assets/` and `public/js/` are generated; edit their source under `web/`.
 
+The original owners image is stored losslessly as small Base64 source parts under `web/encoded-assets/owners/` for upload compatibility. `scripts/prepare-web.mjs` reconstructs `web/assets/owners.webp`, verifies its exact byte count and SHA-256, then copies it to the public assets. Keep all parts and the manifest together; the generated binary is ignored. No image quality or pixel content is changed.
+
 For the current user journey, follow [the dashboard walkthrough](dashboard-foundation.md#run-the-existing-workflow). Sample campaigns, creatives, events and balances are explicitly fictional.
 
 ## Local identity and data

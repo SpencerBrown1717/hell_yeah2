@@ -30,6 +30,8 @@ Preserve the current source authority, including managed ad accounts, read-only 
 Use Node 24.15 or newer in the 24 LTS line (tested with 24.19); Node 22.22.2 also satisfies the locked test dependencies. The pnpm lockfile fixes resolved dependency versions; install it without updating the lockfile.
 
 ```bash
+git clone https://github.com/SpencerBrown1717/hell_yeah2.git
+cd hell_yeah2
 corepack pnpm install --frozen-lockfile
 npm run dev
 # Open http://localhost:5173
@@ -80,6 +82,8 @@ Changing environment variables alone does not certify a live integration. During
 Reference date: October 18, 2026. This is a separate repository and has no ODA dependency.
 
 ## Repository and CI
+
+The application lives at the repository root. Run the install, development, quality and build commands beside `package.json` and `pnpm-lock.yaml`. The manual-upload folders `Hell_yeah_2.1/` and `hell_yeah2/` have been consolidated into this layout; their original commits remain in GitHub history. The project map below describes the source directories.
 
 The private Site source repository preserves the published source. The separate private GitHub repository is [SpencerBrown1717/hell_yeah2](https://github.com/SpencerBrown1717/hell_yeah2); release checks and verification evidence are recorded in [verification](docs/verification.md).
 
