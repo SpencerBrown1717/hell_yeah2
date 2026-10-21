@@ -15,7 +15,7 @@ The default entry is now a replica of the existing Hellyeah **dashboard**, based
 | [Creative Intelligence](docs/prds/03-creative-intelligence.md) | 12 | Capture, source evidence, Studio versions, research briefs and measured feedback |
 | [Experimentation Platform](docs/prds/04-experimentation-platform.md) | 12 | Registered designs, assignment, analysis, scoped execution, reconciliation and learning |
 
-Each Markdown file has explicit numbered page sections and `<!-- PAGE -->` boundaries. Markdown has no universal physical page size; the sections define the pagination contract. The validator checks at least ten substantive sections in every file and that the OS is the largest. A print renderer should map each marker to a page break and preserve tables/code wrapping.
+[PRD provenance](docs/prd-provenance.md) records the recovered version 2.0.0 originals, their checksums and how the current files relate to them. Each Markdown file has explicit numbered page sections and `<!-- PAGE -->` boundaries. Markdown has no universal physical page size; the sections define the pagination contract. The validator checks at least ten substantive sections in every file and that the OS is the largest. A print renderer should map each marker to a page break and preserve tables/code wrapping.
 
 ## Existing flow mapping
 
