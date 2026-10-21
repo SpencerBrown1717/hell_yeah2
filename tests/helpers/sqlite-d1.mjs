@@ -1,27 +1,33 @@
 import { DatabaseSync } from "node:sqlite";
 import { readFileSync, readdirSync } from "node:fs";
-export function sqliteD1() {
-  const sqlite = new DatabaseSync(":memory:");
-  for (const file of readdirSync(new URL("../../drizzle/", import.meta.url))
+export function drizzleMigrations() {
+  return readdirSync(new URL("../../drizzle/", import.meta.url))
     .filter((f) => f.endsWith(".sql"))
-    .sort())
-    sqlite.exec(
-      readFileSync(new URL(`../../drizzle/${file}`, import.meta.url), "utf8"),
-    );
+    .sort()
+    .map((file) => ({
+      tag: file.replace(/\.sql$/, ""),
+      sql: readFileSync(new URL(`../../drizzle/${file}`, import.meta.url), "utf8"),
+    }));
+}
+export function sqliteD1({ migrate = true } = {}) {
+  const sqlite = new DatabaseSync(":memory:");
+  if (migrate) for (const { sql } of drizzleMigrations()) sqlite.exec(sql);
+  // Like D1, statements compile when they execute, not when they are bound, so
+  // a batch may create a table and then index it.
   const prepare = (sql) => ({
     bind(...args) {
-      const stmt = sqlite.prepare(sql);
+      const stmt = () => sqlite.prepare(sql);
       return {
         async first() {
-          return stmt.get(...args) ?? null;
+          return stmt().get(...args) ?? null;
         },
         async all() {
-          return { results: stmt.all(...args) };
+          return { results: stmt().all(...args) };
         },
         async run() {
-          return { meta: { changes: Number(stmt.run(...args).changes) } };
+          return { meta: { changes: Number(stmt().run(...args).changes) } };
         },
-        exec: () => ({ meta: { changes: Number(stmt.run(...args).changes) } }),
+        exec: () => ({ meta: { changes: Number(stmt().run(...args).changes) } }),
       };
     },
   });
